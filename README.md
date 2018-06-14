@@ -1,2 +1,3 @@
-# PIC-
-Códigos e circuitos de projetos com o micro controlador PIC.
+# Ascendendo um led com um botão
+
+Duvidas ou sugestões fale comigo no twiter: @fndkrs
