@@ -1,0 +1,152 @@
+CCS PCM C Compiler, Version 4.074, 38112               14-jun-18 17:16
+
+               Filename: C:\Users\Fernando Carlos\Desktop\pic_led_button\codigo\main.lst
+
+               ROM used: 90 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 7 (2%) at main() level
+                         7 (2%) worst case
+               Stack:    0 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   004
+0003:  NOP
+.................... #include "C:\Users\Fernando Carlos\Desktop\pic_led_button\codigo\main.h" 
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #device adc=8 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES HS                    	//High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD) 
+.................... #FUSES NOPUT                 	//No Power Up Timer 
+.................... #FUSES NOPROTECT             	//Code not protected from reading 
+.................... #FUSES NODEBUG               	//No Debug mode for ICD 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+.................... #FUSES NOCPD                 	//No EE protection 
+.................... #FUSES NOWRT                 	//Program memory not write protected 
+....................  
+.................... #use delay(clock=20000000) 
+....................  
+....................  
+....................  
+....................  
+.................... void main() 
+.................... { 
+*
+0004:  CLRF   04
+0005:  BCF    03.7
+0006:  MOVLW  1F
+0007:  ANDWF  03,F
+0008:  BSF    03.5
+0009:  BSF    1F.0
+000A:  BSF    1F.1
+000B:  BSF    1F.2
+000C:  BCF    1F.3
+000D:  MOVLW  07
+000E:  MOVWF  1C
+....................  
+....................    setup_adc_ports(NO_ANALOGS); 
+*
+0012:  BSF    03.5
+0013:  BSF    1F.0
+0014:  BSF    1F.1
+0015:  BSF    1F.2
+0016:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+0017:  BCF    03.5
+0018:  BCF    1F.0
+....................    setup_psp(PSP_DISABLED); 
+0019:  BSF    03.5
+001A:  BCF    09.4
+....................    setup_spi(SPI_SS_DISABLED); 
+001B:  BCF    03.5
+001C:  BCF    14.5
+001D:  BCF    20.5
+001E:  MOVF   20,W
+001F:  BSF    03.5
+0020:  MOVWF  07
+0021:  BCF    03.5
+0022:  BSF    20.4
+0023:  MOVF   20,W
+0024:  BSF    03.5
+0025:  MOVWF  07
+0026:  BCF    03.5
+0027:  BCF    20.3
+0028:  MOVF   20,W
+0029:  BSF    03.5
+002A:  MOVWF  07
+002B:  MOVLW  01
+002C:  BCF    03.5
+002D:  MOVWF  14
+002E:  MOVLW  00
+002F:  BSF    03.5
+0030:  MOVWF  14
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+0031:  MOVF   01,W
+0032:  ANDLW  C7
+0033:  IORLW  08
+0034:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+0035:  BCF    03.5
+0036:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0037:  MOVLW  00
+0038:  MOVWF  78
+0039:  MOVWF  12
+003A:  MOVLW  00
+003B:  BSF    03.5
+003C:  MOVWF  12
+....................    setup_comparator(NC_NC_NC_NC); 
+003D:  MOVLW  07
+003E:  MOVWF  1C
+003F:  MOVF   05,W
+0040:  MOVLW  10
+0041:  MOVWF  77
+0042:  DECFSZ 77,F
+0043:  GOTO   042
+0044:  NOP
+0045:  MOVF   1C,W
+0046:  BCF    03.5
+0047:  BCF    0D.6
+....................    setup_vref(FALSE); 
+0048:  BSF    03.5
+0049:  CLRF   1D
+....................  
+....................    // my code 
+....................  
+....................    while(true){ 
+....................    	if(input(pin_d0)){ 
+004A:  BSF    08.0
+004B:  BCF    03.5
+004C:  BTFSS  08.0
+004D:  GOTO   053
+....................    		output_high(pin_b4); 
+004E:  BSF    03.5
+004F:  BCF    06.4
+0050:  BCF    03.5
+0051:  BSF    06.4
+....................    	}else{ 
+0052:  GOTO   057
+....................    		output_low(pin_b4); 
+0053:  BSF    03.5
+0054:  BCF    06.4
+0055:  BCF    03.5
+0056:  BCF    06.4
+....................    	} 
+....................    } 
+0057:  BSF    03.5
+0058:  GOTO   04A
+....................     
+....................     
+....................  
+.................... } 
+0059:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F3A   HS NOWDT NOPUT NODEBUG NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT
